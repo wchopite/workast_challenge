@@ -3,7 +3,7 @@ const cors = require('cors');
 const compression = require('compression');
 const helmet = require('helmet');
 
-module.exports = ({logger, UserRoute}) => {
+module.exports = ({logger, UserRoute, ArticleRoute}) => {
   const router = Router();
   const apiRouter = Router();
 
@@ -20,7 +20,9 @@ module.exports = ({logger, UserRoute}) => {
   /*
    * API routes are defined here
    */
-  apiRouter.use('/users', UserRoute);
+  apiRouter
+    .use('/users', UserRoute)
+    .use('/articles', ArticleRoute);
 
   router
     .use('/api', apiRouter);

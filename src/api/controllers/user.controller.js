@@ -8,10 +8,10 @@ UserController.prototype.getAll = async function getAll(req, res) {
 };
 
 UserController.prototype.create = async function create(req, res) {
-  const { body } = req;
+  const {body} = req;
 
-  const response = await this.UserApp.create({ user: body });
-  res.status(201).json({ user: response });
+  const response = await this.UserApp.create({user: body});
+  res.status(201).json({user: response});
 };
 
 module.exports = UserController;
