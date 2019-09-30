@@ -27,15 +27,16 @@ module.exports = ({logger, UserRoute, ArticleRoute}) => {
   router
     .use('/api', apiRouter);
 
-  // TODO: move to a folder
-  router.use( (err, req, res, next) => { // eslint-disable-line no-unused-vars
-    logger.error(err);
+  router.use((req, res, next) => {
+    const error = new Error('Not found');
+    error.status = 404;
+    next(error);
+  });
 
-    res.status(500).json({
-      type: 'InternalServerError',
-      message: err.message,
-      stack: err.stack
-    });
+  router.use((error, req, res, next) => { // eslint-disable-line no-unused-vars
+    logger.error(error);
+    res.status(error.status || 500);
+    res.json({error: {message: error.message}});
   });
 
   return router;
