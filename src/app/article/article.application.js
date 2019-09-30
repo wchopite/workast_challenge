@@ -15,6 +15,9 @@ ArticleApp.prototype = {
   },
   async remove({id}) {
     return this.ArticleRepository.remove(id);
+  },
+  async getByTags({tags}) {
+    return this.ArticleRepository.getByTags(tags);
   }
 };
 

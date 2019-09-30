@@ -27,6 +27,12 @@ ArticleController.prototype = {
 
     const response = await this.ArticleApp.remove({id});
     res.json(response);
+  },
+  async getByTags(req, res) {
+    const tags = req.params.tags.split(",");
+
+    const response = await this.ArticleApp.getByTags({tags});
+    res.json(response);
   }
 };
 

@@ -25,9 +25,16 @@ articleSchema.statics = {
   getById(id) {
     return this.findOne({_id: id});
   },
+  getByTags(tags, { skip = 0, limit = 20 } = {}) {
+    return this.find({tags: {$in: tags}})
+      .sort({createdAt: -1})
+      .skip(+skip)
+      .limit(+limit)
+      .exec();
+  },
   list({ skip = 0, limit = 20 } = {}) {
     return this.find()
-      .sort({ createdAt: -1 })
+      .sort({createdAt: -1})
       .skip(+skip)
       .limit(+limit)
       .exec();

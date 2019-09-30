@@ -2,10 +2,6 @@ const ArticleMapper = require('./mongoArticleMapper');
 
 const MongoArticleRepository = function MongoArticleRepository({ArticleDbModel}) {
   this.ArticleDbModel = ArticleDbModel;
-
-  this._getById = async function _getById(id) {
-    return this.ArticleDbModel.getById(id);
-  };
 };
 
 MongoArticleRepository.prototype = {
@@ -29,7 +25,7 @@ MongoArticleRepository.prototype = {
     return ArticleMapper.toEntity(updatedArticle);
   },
   async remove(id) {
-    const articleToDelete = await this._getById(id);
+    const articleToDelete = await this.ArticleDbModel.getById(id);
     if (!articleToDelete){
       const error = new Error('ValidationError');
       error.details = { message: 'Article not exist'};
@@ -37,6 +33,10 @@ MongoArticleRepository.prototype = {
     }
     const deletedArticle = await articleToDelete.remove();
     return ArticleMapper.toEntity(deletedArticle);
+  },
+  async getByTags(tags) {
+    const articles = await this.ArticleDbModel.getByTags(tags);
+    return articles.map(ArticleMapper.toEntity);
   }
 };
 
