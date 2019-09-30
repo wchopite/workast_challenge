@@ -1,6 +1,6 @@
 const UserMapper = require('./mongoUserMapper');
 
-const MongoUserRepository = function MongoUserRepository({ UserDbModel }) {
+const MongoUserRepository = function MongoUserRepository({UserDbModel}) {
   this.UserDbModel = UserDbModel;
 };
 
