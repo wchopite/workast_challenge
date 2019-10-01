@@ -5,10 +5,10 @@ const ArticleController = function ArticleController({ArticleApp}) {
 // TODO: add a wrap to manage errors
 ArticleController.prototype = {
   async getAll(req, res, next) {
-    const { from, to, limit } = req.query;
+    const {skip, limit} = req.query;
 
     try {
-      const articles = await this.ArticleApp.getAll({options: {from, to, limit}});
+      const articles = await this.ArticleApp.getAll({options: {skip, limit}});
       res.status(200).json(articles);
     } catch(err) {
       next(err);
@@ -47,9 +47,10 @@ ArticleController.prototype = {
   },
   async getByTags(req, res, next) {
     const tags = req.params.tags.split(',');
+    const {skip, limit} = req.query;
 
     try {
-      const response = await this.ArticleApp.getByTags({tags});
+      const response = await this.ArticleApp.getByTags({tags, options: {skip, limit}});
       res.json(response);
     } catch(err) {
       next(err);

@@ -3,8 +3,8 @@ const ArticleApp = function ArticleApp({ArticleRepository}) {
 };
 
 ArticleApp.prototype = {
-  async getAll() {
-    const users = this.ArticleRepository.getAll();
+  async getAll({options}) {
+    const users = this.ArticleRepository.getAll(options);
     return users;
   },
   async create({article}) {
@@ -16,8 +16,8 @@ ArticleApp.prototype = {
   async remove({id}) {
     return this.ArticleRepository.remove(id);
   },
-  async getByTags({tags}) {
-    return this.ArticleRepository.getByTags(tags);
+  async getByTags({tags, options}) {
+    return this.ArticleRepository.getByTags(tags, options);
   }
 };
 

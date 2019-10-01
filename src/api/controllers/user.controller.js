@@ -5,8 +5,10 @@ const UserController = function UserController({UserApp}) {
 // TODO: add a wrap to manage errors
 UserController.prototype = {
   async getAll(req, res, next) {
+    const {skip, limit} = req.query;
+
     try {
-      const users = await this.UserApp.getAll();
+      const users = await this.UserApp.getAll({options: {skip, limit}});
       res.status(200).json(users);
     } catch(err) {
       next(err);

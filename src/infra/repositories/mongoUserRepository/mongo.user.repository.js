@@ -5,8 +5,9 @@ const MongoUserRepository = function MongoUserRepository({UserDbModel}) {
 };
 
 MongoUserRepository.prototype = {
-  async getAll() {
-    const users = await this.UserDbModel.list();
+  async getAll(options) {
+    const query = Object.assign({}, options);
+    const users = await this.UserDbModel.list(query);
     return users.map(UserMapper.toEntity);
   },
   async create(user) {

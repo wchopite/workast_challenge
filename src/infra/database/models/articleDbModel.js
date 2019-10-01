@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { pagination } = require('../../../../config/config');
 
 const articleSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -25,14 +26,14 @@ articleSchema.statics = {
   getById(id) {
     return this.findOne({_id: id});
   },
-  getByTags(tags, { skip = 0, limit = 20 } = {}) {
+  getByTags(tags, {skip = 0, limit = pagination.limit} = {}) {
     return this.find({tags: {$in: tags}})
       .sort({createdAt: -1})
       .skip(+skip)
       .limit(+limit)
       .exec();
   },
-  list({ skip = 0, limit = 20 } = {}) {
+  list({skip = 0, limit = pagination.limit} = {}) {
     return this.find()
       .sort({createdAt: -1})
       .skip(+skip)
@@ -43,6 +44,8 @@ articleSchema.statics = {
     return mongoose.Types.ObjectId();
   }
 };
+
+articleSchema.index({tags: 1});
 
 const Article = mongoose.model('Article', articleSchema);
 
