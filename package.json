@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "API"
+    "API",
+    "Challenge"
   ],
   "author": "Wladimir Chopite <wchopite@gmail.com>",
   "license": "ISC",
