@@ -16,7 +16,7 @@ The API validates a token sent in the headers. This token must be configured in 
 
 ```
 Content-Type: "application/json"
-Authorization: "Bearer TOKENTOACCESSTHEAPI"
+Authorization: "Bearer 5CD4ED173E1C95FE763B753A297D5"
 ```
 
 ## Scripts
@@ -29,3 +29,12 @@ This repo comes with some npm scripts, you will run them with `npm run <script n
 - `test:unit`: Run only the unit tests
 - `test:integration`: Run only the integration tests
 - `lint`: Lint the codebase
+
+## Running the app with docker-compose
+
+If you wish, you can run the app using Docker and Docker Compose. For this, you need:
+
+1. `Install Docker`: https://docs.docker.com/compose/install/
+2. `Install Docker Compose`: https://docs.docker.com/compose/install/
+
+Once you have installed them, in the root folder you need to run `docker-compose up`. This command generate the containers with the node app and mongo database. Then you can test it using an application like Postman (for example)
