@@ -5,8 +5,9 @@ const MongoArticleRepository = function MongoArticleRepository({ArticleDbModel})
 };
 
 MongoArticleRepository.prototype = {
-  async getAll() {
-    const articles = await this.ArticleDbModel.list();
+  async getAll(options) {
+    const query = Object.assign({}, options);
+    const articles = await this.ArticleDbModel.list(query);
     return articles.map(ArticleMapper.toEntity);
   },
   async create(article) {
@@ -34,8 +35,9 @@ MongoArticleRepository.prototype = {
     const deletedArticle = await articleToDelete.remove();
     return ArticleMapper.toEntity(deletedArticle);
   },
-  async getByTags(tags) {
-    const articles = await this.ArticleDbModel.getByTags(tags);
+  async getByTags(tags, options) {
+    const query = Object.assign({}, options);
+    const articles = await this.ArticleDbModel.getByTags(tags, query);
     return articles.map(ArticleMapper.toEntity);
   }
 };

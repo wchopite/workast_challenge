@@ -3,8 +3,8 @@ const UserApp = function UserApp({UserRepository}) {
 };
 
 UserApp.prototype = {
-  async getAll() {
-    const users = this.UserRepository.getAll();
+  async getAll({options}) {
+    const users = this.UserRepository.getAll(options);
     return users;
   },
   async create({user}) {
