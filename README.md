@@ -41,4 +41,4 @@ Once you have installed them, in the root folder you need to run `docker-compose
 
 ## Endpoints documentation
 
-This API uses swagger for the documentation of endpoints. To access this, you just need to start the server and then access `http: // server: port / api / docs`, for example:` http: // localhost: 8080 / api / docs`
+This API uses swagger for the documentation of endpoints. To access this, you just need to start the server and then access `http://server:port/api/docs`, for example:` http://localhost:8080/api/docs`
