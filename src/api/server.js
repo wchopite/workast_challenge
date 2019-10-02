@@ -15,7 +15,9 @@ Server.prototype.start = function start() {
     const http = this.express
       .listen(this.config.server.port, () => {
         const { port } = http.address();
-        this.logger.info(`[p ${process.pid}] Listening at port ${port}`);
+        if (this.config.env !== 'test') {
+          this.logger.info(`[p ${process.pid}] Listening at port ${port}`);
+        }
         resolve();
       });
   });

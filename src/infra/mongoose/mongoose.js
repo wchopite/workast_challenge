@@ -29,12 +29,15 @@ module.exports = ({ logger, config }) => {
       mongoose.connect(uri, {
         useNewUrlParser: true,
         useFindAndModify: false,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true
       });
 
       return new Promise((resolve) => {
         mongoose.connection.on('connected', () => {
-          logger.info(`Mongoose default connection is open to ${uri}`);
+          if (config.env === 'development') {
+            logger.info(`Mongoose default connection is open to ${uri}`);
+          }
           resolve(mongoose.connection);
         });
       });

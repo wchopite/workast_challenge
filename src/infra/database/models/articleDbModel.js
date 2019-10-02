@@ -46,6 +46,7 @@ articleSchema.statics = {
 };
 
 articleSchema.index({tags: 1});
+articleSchema.index({userId: 1});
 
 const Article = mongoose.model('Article', articleSchema);
 

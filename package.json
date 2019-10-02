@@ -1,17 +1,23 @@
 {
   "name": "workast_test",
   "version": "1.0.0",
-  "description": "",
+  "description": "API Restful with NodeJs and MongoDB using layer separation",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
-    "start:dev": "NODE_ENV=development && nodemon index",
+    "start": "cross-env NODE_ENV=production node index",
+    "start:dev": "cross-env NODE_ENV=development && nodemon index",
     "lint": "eslint ./",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test AUTH_TOKEN=test mocha --recursive --exit",
+    "test:unit": "cross-env NODE_ENV=test AUTH_TOKEN=test mocha test/unit/**/*.test.js --recursive --exit",
+    "test:integration": "cross-env NODE_ENV=test AUTH_TOKEN=test mocha test/integration/**/*.test.js --recursive --exit"
   },
   "keywords": [
-    "API",
-    "Challenge"
+    "api",
+    "challenge",
+    "restful",
+    "nodejs",
+    "mongodb",
+    "mongoose"
   ],
   "author": "Wladimir Chopite <wchopite@gmail.com>",
   "license": "ISC",
@@ -21,6 +27,7 @@
     "awilix-express": "^2.1.1",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
+    "cross-env": "^6.0.3",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "helmet": "^3.21.1",
@@ -34,6 +41,7 @@
     "chai": "^4.2.0",
     "eslint": "^6.4.0",
     "mocha": "^6.2.0",
+    "mockgoose": "^8.0.3",
     "nodemon": "^1.19.2",
     "nyc": "^14.1.1",
     "supertest": "^4.0.2"
