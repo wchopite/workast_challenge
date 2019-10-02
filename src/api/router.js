@@ -3,7 +3,7 @@ const cors = require('cors');
 const compression = require('compression');
 const helmet = require('helmet');
 
-module.exports = ({logger, UserRoute, ArticleRoute}) => {
+module.exports = ({logger, swaggerMiddleware, UserRoute, ArticleRoute}) => {
   const router = Router();
   const apiRouter = Router();
 
@@ -12,7 +12,8 @@ module.exports = ({logger, UserRoute, ArticleRoute}) => {
     .use(urlencoded({ extended: true }))
     .use(helmet())
     .use(cors())
-    .use(compression());
+    .use(compression())
+    .use('/docs', swaggerMiddleware);
 
   // global health check
   router.get('/', (req, res) => res.json({status: 'ok'}));

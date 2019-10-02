@@ -1,5 +1,7 @@
 const { createContainer, asClass, asFunction, asValue } = require('awilix');
 
+const { swaggerMiddleware } = require('./api/middlewares/middlewares');
+
 // config layer
 const config = require('../config/config');
 /* *************************************************************************/
@@ -50,6 +52,9 @@ const { logger } = require('./shared/shared');
 const container = createContainer();
 
 container
+  .register({
+    swaggerMiddleware: asValue([swaggerMiddleware])
+  })
   // config
   .register({
     config: asValue(config),

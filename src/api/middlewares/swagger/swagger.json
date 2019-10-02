@@ -1,0 +1,448 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Challenge NodeJS API",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "description": "Local server",
+      "url": "/api"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "operationId": "listUsers",
+        "tags": [ "Users" ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "description": "The numbers of items to return"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createUser",
+        "tags": [ "Users" ],
+        "requestBody": {
+          "description": "User data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles": {
+      "get": {
+        "operationId": "ListArticles",
+        "tags": [ "Articles" ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "description": "The numbers of items to return"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of articles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createArticle",
+        "tags": [ "Articles" ],
+        "requestBody": {
+          "description": "Article data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewArticle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Article created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles/byTags/{tags}": {
+      "get": {
+        "operationId": "ListArticlesByTags",
+        "tags": [ "Articles" ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "description": "The numbers of items to return"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of articles by tags",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles/{id}": {
+      "put": {
+        "operationId": "updateArticle",
+        "tags": [ "Articles" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of article to update",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "description": "Article data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewArticle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Article updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteArticle",
+        "tags": [ "Articles" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of article to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "allOf": [
+          { "$ref": "#/components/schemas/NewUser" },
+          {
+            "required": [ "_id" ],
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        ]
+      },
+      "NewUser": {
+        "required": [ "name" ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "Article": {
+        "allOf": [
+          { "$ref": "#/components/schemas/NewArticle" },
+          {
+            "required": [ "_id" ],
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        ]
+      },
+      "NewArticle": {
+        "required": [ "title", "text", "userId", "tags" ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

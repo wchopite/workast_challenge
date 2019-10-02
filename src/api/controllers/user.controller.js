@@ -19,8 +19,11 @@ UserController.prototype = {
 
     try {
       const response = await this.UserApp.create({user: body});
-      res.status(201).json({user: response});
+      res.status(201).json(response);
     } catch(err) {
+      if(err.name === 'ValidationError') {
+        err.status = 400;
+      }
       next(err);
     }
   }
