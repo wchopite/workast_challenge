@@ -19,7 +19,7 @@ ArticleController.prototype = {
 
     try {
       const response = await this.ArticleApp.create({article: body});
-      res.status(201).json({article: response});
+      res.status(201).json(response);
     } catch(err) {
       next(err);
     }
