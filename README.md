@@ -38,3 +38,7 @@ If you wish, you can run the app using Docker and Docker Compose. For this, you 
 2. `Install Docker Compose`: https://docs.docker.com/compose/install/
 
 Once you have installed them, in the root folder you need to run `docker-compose up`. This command generate the containers with the node app and mongo database. Then you can test it using an application like Postman (for example)
+
+## Endpoints documentation
+
+This API uses swagger for the documentation of endpoints. To access this, you just need to start the server and then access `http: // server: port / api / docs`, for example:` http: // localhost: 8080 / api / docs`
