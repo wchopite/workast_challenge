@@ -1,6 +1,6 @@
 module.exports = {
   server: {
-    name: 'workast-prod',
+    name: 'workast',
     port: process.env.PORT
   },
   auth: {
