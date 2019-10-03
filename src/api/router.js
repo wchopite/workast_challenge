@@ -3,7 +3,7 @@ const cors = require('cors');
 const compression = require('compression');
 const helmet = require('helmet');
 
-module.exports = ({logger, swaggerMiddleware, UserRoute, ArticleRoute}) => {
+module.exports = ({logger, config, swaggerMiddleware, UserRoute, ArticleRoute}) => {
   const router = Router();
   const apiRouter = Router();
 
@@ -35,7 +35,9 @@ module.exports = ({logger, swaggerMiddleware, UserRoute, ArticleRoute}) => {
   });
 
   router.use((error, req, res, next) => { // eslint-disable-line no-unused-vars
-    logger.error(error);
+    if (config.env !== 'test') {
+      logger.error(error);
+    }
     res.status(error.status || 500);
     res.json({error: {message: error.message}});
   });
