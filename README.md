@@ -35,6 +35,8 @@ This repo comes with some npm scripts, you will run them with `npm run <script n
 - `lint`: Lint the codebase
 - `test`: Run the test suite
 
+For testing, `mocha`, `chai`, and `supertest` are used
+
 ## Running the app with docker-compose
 
 If you wish, you can run the app using Docker and Docker Compose. For this, you need:
