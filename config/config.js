@@ -2,7 +2,7 @@ require('dotenv').config();
 const path = require('path');
 const fs = require('fs');
 
-const ENV = process.env.ENV || 'development';
+const ENV = process.env.NODE_ENV || 'development';
 const envConfig = require(path.join(__dirname, 'environments', ENV));
 const dbConfig = loadDbConfig();
 

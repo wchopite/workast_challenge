@@ -19,16 +19,21 @@ Content-Type: "application/json"
 Authorization: "Bearer 5CD4ED173E1C95FE763B753A297D5"
 ```
 
+## Things to do after configuration and dependencies installation (test purpose)
+
+1. Create an user using the `/api/users` endpoint
+2. Use the id from of the recently created user, and create an article
+
+Check the `swagger doc` `/api/docs` for more information
+
 ## Scripts
 
 This repo comes with some npm scripts, you will run them with `npm run <script name>`:
 
-- `dev`: Run the application in development mode
-- `start` Run the application in production mode 
-- `test`: Run the test suite
-- `test:unit`: Run only the unit tests
-- `test:integration`: Run only the integration tests
+- `start` Run the application in production mode
+- `start:dev`: Run the application in development mode
 - `lint`: Lint the codebase
+- `test`: Run the test suite
 
 ## Running the app with docker-compose
 
@@ -42,3 +47,15 @@ Once you have installed them, in the root folder you need to run `docker-compose
 ## Endpoints documentation
 
 This API uses swagger for the documentation of endpoints. To access this, you just need to start the server and then access `http://server:port/api/docs`, for example:` http://localhost:8080/api/docs`
+
+## Thinks to do
+
+1. Add more `test` and improve the current test configuration
+2. Make unit test using `mongodb-memory-server`, `sinon` if necessary
+3. Add input validation on endpoints using `ajv` https://www.npmjs.com/package/ajv, and generate the docs from this point (this can allow to delete `swagger docs`)
+4. Maybe is a good idea to remove the `structure package` for `domain objects` and find a way to use the same `ajv` to validate them
+5. Use `nyc` for `coverage`
+6. Add a `cache layer` with `redis`
+7. Separate in multiple files `express error middleware`. Create custom errors
+8. Allow to add a token to the swagger documentation (while still it use)
+9. Add files configuration to `CI/CD` (codeship, google cloud build, etc)
